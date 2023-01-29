@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
@@ -21,12 +21,9 @@ jobs:
       - name: install dependencies
         run: poetry install
 
-      - name: 単行
-        run: echo "line" > test.txt
-
-#       - name: Run owl
-#         run:
-#           poetry run python trophy.py
+      - name: Run
+        run:
+          poetry run python trophy.py
 #         env:
 #           SLACK_ID: ${{ secrets.SLACK_ID }}
 
