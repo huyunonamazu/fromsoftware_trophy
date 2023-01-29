@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 def PercentageOfTrophiesObtained(file_path, game_id):
-
+    
     data = {"date":int(str(datetime.now().date()).replace("-", ""))}
 
     # スクレイピングしたいPS4ゲームのURLを指定
@@ -25,8 +25,8 @@ def PercentageOfTrophiesObtained(file_path, game_id):
     percent = [ item.select_one("[class='separator rarity']") for item in table.select("[class='hover-show']") ]
 
     for i in range(len(title)):
-        print( title[i].text, end=" : " )
-        print( percent[i].select_one("[class='typo-top']").text )
+#         print( title[i].text, end=" : " )
+#         print( percent[i].select_one("[class='typo-top']").text )
         data[title[i].text] = float( percent[i].select_one("[class='typo-top']").text.replace("%", "") )
 
     # CSVファイルが存在するか確認
@@ -43,11 +43,11 @@ def PercentageOfTrophiesObtained(file_path, game_id):
     df.to_csv(file_path, index=False)
 
 if __name__ == '__main__':
-    print("aaaaa")    
-    PercentageOfTrophiesObtained("./darksouls3.csv", "4477-dark-souls-iii")
-    PercentageOfTrophiesObtained("./darksoulsRemastered.csv", "7655-dark-souls-remastered")
-    PercentageOfTrophiesObtained("./darksouls2.csv", "3483-dark-souls-ii-scholar-of-the-first-sin")
-    PercentageOfTrophiesObtained("./bloodborne.csv", "3431-bloodborne")
+    os.makedirs("./data", exist_ok=True)  
+    PercentageOfTrophiesObtained("./data/darksouls3.csv", "4477-dark-souls-iii")
+    PercentageOfTrophiesObtained("./data/darksoulsRemastered.csv", "7655-dark-souls-remastered")
+    PercentageOfTrophiesObtained("./data/darksouls2.csv", "3483-dark-souls-ii-scholar-of-the-first-sin")
+    PercentageOfTrophiesObtained("./data/bloodborne.csv", "3431-bloodborne")
 
 
 
