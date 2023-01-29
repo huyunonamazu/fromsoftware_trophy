@@ -13,17 +13,17 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Run image
-        uses: abatilo/actions-poetry@v2.1.6
-        with:
-          poetry-version: 1.2.0
-
-      - name: install dependencies
-        run: poetry install
-
+      - name: Install dependencies
+        run: |
+          # pip更新
+          python -m pip install --upgrade pip
+          python -m pip install requests
+          python -m pip install beautifulsoup4
+          python -m pip install pandas
+          
       - name: Run
         run:
-          poetry run python trophy.py
+          python trophy.py
 #         env:
 #           SLACK_ID: ${{ secrets.SLACK_ID }}
 
