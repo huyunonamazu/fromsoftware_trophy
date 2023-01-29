@@ -42,10 +42,12 @@ def PercentageOfTrophiesObtained(file_path, game_id):
     # CSVファイルの更新
     df.to_csv(file_path, index=False)
 
-PercentageOfTrophiesObtained("./darksouls3.csv", "4477-dark-souls-iii")
-PercentageOfTrophiesObtained("./darksoulsRemastered.csv", "7655-dark-souls-remastered")
-PercentageOfTrophiesObtained("./darksouls2.csv", "3483-dark-souls-ii-scholar-of-the-first-sin")
-PercentageOfTrophiesObtained("./bloodborne.csv", "3431-bloodborne")
+if __name__ == '__main__':
+    print("aaaaa")    
+    PercentageOfTrophiesObtained("./darksouls3.csv", "4477-dark-souls-iii")
+    PercentageOfTrophiesObtained("./darksoulsRemastered.csv", "7655-dark-souls-remastered")
+    PercentageOfTrophiesObtained("./darksouls2.csv", "3483-dark-souls-ii-scholar-of-the-first-sin")
+    PercentageOfTrophiesObtained("./bloodborne.csv", "3431-bloodborne")
 
 
 
