@@ -24,28 +24,10 @@ jobs:
       - name: Run
         run:
           python trophy.py
-#         env:
-#           SLACK_ID: ${{ secrets.SLACK_ID }}
 
-# permissions:
-#   actions: write
-  
-#   - name: 単行
-#     run: echo "line" > test.txt
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#     - uses: actions/checkout@master
-#     - name: create file
-#       run: |
-#         bash create_file.sh
-#     - name: Commit files
-#       run: |
-#         git config --local user.email "action@github.com"
-#         git config --local user.name "GitHub Action"
-#         git add .
-#         git commit -m "Add changes" -a
-#     - name: Push changes
-#       uses: ad-m/github-push-action@master
-#       with:
-#         github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./data
+          publish_branch: gh-pages
