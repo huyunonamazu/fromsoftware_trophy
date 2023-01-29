@@ -21,14 +21,17 @@ jobs:
       - name: install dependencies
         run: poetry install
 
-      - name: Run owl
-        run:
-          poetry run python trophy.py
+      - name: 単行
+        run: echo "line" > test.txt
+
+#       - name: Run owl
+#         run:
+#           poetry run python trophy.py
 #         env:
 #           SLACK_ID: ${{ secrets.SLACK_ID }}
 
-permissions:
-  actions: write
+# permissions:
+#   actions: write
   
 #   - name: 単行
 #     run: echo "line" > test.txt
