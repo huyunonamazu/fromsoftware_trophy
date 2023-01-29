@@ -5,22 +5,47 @@ on:
      - cron: '0 22 * * *'
 
 jobs:
-  - name: 単行
-    run: echo "line" > test.txt
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@master
-    - name: create file
-      run: |
-        bash create_file.sh
-    - name: Commit files
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add .
-        git commit -m "Add changes" -a
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Run image
+        uses: abatilo/actions-poetry@v2.1.6
+        with:
+          poetry-version: 1.2.0
+
+      - name: install dependencies
+        run: poetry install
+
+      - name: Run owl
+        run:
+          poetry run python trophy.py
+#         env:
+#           SLACK_ID: ${{ secrets.SLACK_ID }}
+
+permissions:
+  actions: write
+  
+#   - name: 単行
+#     run: echo "line" > test.txt
+#   build:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: create file
+#       run: |
+#         bash create_file.sh
+#     - name: Commit files
+#       run: |
+#         git config --local user.email "action@github.com"
+#         git config --local user.name "GitHub Action"
+#         git add .
+#         git commit -m "Add changes" -a
+#     - name: Push changes
+#       uses: ad-m/github-push-action@master
+#       with:
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
