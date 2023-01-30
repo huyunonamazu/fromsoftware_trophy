@@ -24,12 +24,22 @@ jobs:
       - name: Run
         run:
           python trophy.py
-          git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name ${{ secrets.NAME }}
-          git add ./data
-          git commit -m "commit"
-          git push origin main
-
+#           git config --global user.email ${{ secrets.EMAIL }}
+#           git config --global user.name ${{ secrets.NAME }}
+#           git add ./data
+#           git commit -m "commit"
+#           git push origin main
+      - name: Upload artifact
+        run: |
+          echo "Uploading artifact"
+          echo "::set-output name=artifact_path::$(pwd)/darksouls3.csv"
+        env:
+          ARTIFACT_NAME: darksouls3.csv
+      - name: Upload artifact to GitHub
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ steps.upload-artifact.outputs.artifact_path }}
 #       - name: Deploy
 #         uses: peaceiris/actions-gh-pages@v3
 #         with:
